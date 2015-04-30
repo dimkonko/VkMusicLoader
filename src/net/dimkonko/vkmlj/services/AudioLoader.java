@@ -21,16 +21,23 @@ public class AudioLoader {
     }
 
     public void loadAudio(AudioModel audioModel) {
-        AudioLoaderThread thread = new AudioLoaderThread();
-        thread.start(audioModel);
+        File audioFile = new File("Downloads/" + audioModel.toString() + ".mp3");
+        if (!audioFile.exists()) {
+            AudioLoaderThread thread = new AudioLoaderThread();
+            thread.start(audioFile, audioModel);
+        } else {
+            System.out.println(audioFile.getName() + " is already exists");
+        }
     }
 
     class AudioLoaderThread implements Runnable {
 
+        private File audioFile;
         private AudioModel audioModel;
         private Thread thread;
 
-        public void start(AudioModel audioModel) {
+        public void start(File audioFile, AudioModel audioModel) {
+            this.audioFile = audioFile;
             this.audioModel = audioModel;
             this.thread = new Thread(this, audioModel.getAid());
             thread.start();
@@ -49,13 +56,14 @@ public class AudioLoader {
             }
 
             try {
-                File audioFile = new File("Downloads/" + audioModel.toString() + ".mp3");
+
                 if (!audioFile.exists()) {
                     OutputStream outstream = new FileOutputStream(audioFile);
                     byte[] buffer = new byte[4096];
                     int len;
                     while ((len = is.read(buffer)) > 0) {
                         outstream.write(buffer, 0, len);
+                        System.out.println(len);
                     }
                     outstream.close();
                 }
