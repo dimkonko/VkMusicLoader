@@ -2,10 +2,12 @@ package net.dimkonko.vkmlj.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.input.MouseEvent;
 import net.dimkonko.vkmlj.OnlineApp;
 import net.dimkonko.vkmlj.services.AudioLoader;
@@ -38,7 +40,7 @@ public class MusicController implements Initializable, SharedApp, Changeable {
         data = new AudioDataAccessor();
         audioLoader = new AudioLoader("Downloads/");
 
-        musicView.setOnMouseClicked(new DoubleClickHandler());
+        musicView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     @Override
@@ -55,19 +57,13 @@ public class MusicController implements Initializable, SharedApp, Changeable {
 
     }
 
-    class DoubleClickHandler implements EventHandler<MouseEvent> {
-
-        @Override
-        public void handle(MouseEvent mouseEvent) {
-            if (mouseEvent.getClickCount() == 2) {
-                System.out.println("Click");
-                ObservableList<String> selectedItem = musicView.getSelectionModel().getSelectedItems();
-                List<AudioModel> audioList = data.getAudioModels(selectedItem);
-
-                for (AudioModel model : audioList) {
-                    audioLoader.loadAudio(model);
-                }
-            }
+    @FXML
+    protected void onDownloadSelected(ActionEvent event) {
+        System.out.println("Download all");
+        List<String> selectedAudios = musicView.getSelectionModel().getSelectedItems();
+        List<AudioModel> audioList = data.getAudioModels(selectedAudios);
+        for (AudioModel model : audioList) {
+            audioLoader.loadAudio(model);
         }
     }
 }
