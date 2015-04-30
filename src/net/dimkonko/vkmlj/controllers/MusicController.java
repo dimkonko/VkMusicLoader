@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import net.dimkonko.vkmlj.OnlineApp;
-import net.dimkonko.vkmlj.Service.AudioLoader;
+import net.dimkonko.vkmlj.services.AudioLoader;
 import net.dimkonko.vkmlj.etc.AudioDataAccessor;
 import net.dimkonko.vkmlj.etc.VkAudioAPI;
 import net.dimkonko.vkmlj.models.AudioModel;

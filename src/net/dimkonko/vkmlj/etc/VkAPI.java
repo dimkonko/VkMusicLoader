@@ -21,8 +21,6 @@ public class VkAPI {
     private String sendReq(String urlStr) {
         String response = null;
         try {
-            System.out.println(urlStr);
-
             URL url = new URL(urlStr);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             int respCode = con.getResponseCode();
@@ -35,10 +33,6 @@ public class VkAPI {
                 strBuffer.append(inputLine);
             }
             in.close();
-
-            // 'OK', 'ERROR'
-            System.out.println(con.getResponseMessage());
-            System.out.println(strBuffer.toString());
             response = strBuffer.toString();
         } catch (IOException e) {
             e.printStackTrace();

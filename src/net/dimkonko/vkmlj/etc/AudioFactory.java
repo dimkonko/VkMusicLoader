@@ -12,20 +12,7 @@ import java.io.IOException;
  */
 public class AudioFactory {
 
-    public static final ObjectMapper MAPPER = createMapper();
-
     public static AudioModel createAudio(String json) {
-        AudioModel audio = null;
-        try {
-            audio = MAPPER.readValue(json, AudioModel.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return audio;
-
-    }
-
-    private static ObjectMapper createMapper() {
-        return new ObjectMapper();
+        return (AudioModel) MapperUtils.parse(json, AudioModel.class);
     }
 }

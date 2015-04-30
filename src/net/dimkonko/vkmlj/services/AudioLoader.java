@@ -1,4 +1,4 @@
-package net.dimkonko.vkmlj.Service;
+package net.dimkonko.vkmlj.services;
 
 import net.dimkonko.vkmlj.models.AudioModel;
 
@@ -7,7 +7,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * Service, which responsible for download songs from internet
+ * services, which responsible for download songs from internet
  */
 public class AudioLoader {
 

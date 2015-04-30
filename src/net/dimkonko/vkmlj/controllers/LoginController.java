@@ -35,7 +35,6 @@ public class LoginController implements Initializable, SharedApp, Changeable {
         webEngine.load(new VKAuth("4585679").getAuthUrl());
 
         webEngine.getLoadWorker().stateProperty().addListener(new WebStatusListener());
-
     }
 
     @Override

@@ -37,7 +37,6 @@ public class Url {
         }
 
         String[] pairs = args.split("&");;
-        System.out.println("brkp");
         for (String pair : pairs) {
             String[] kwargs = pair.split("=");
             arguments.put(kwargs[0], kwargs[1].isEmpty() ? "" : kwargs[1]);

@@ -1,5 +1,0 @@
-<root>
-    <item name='com.fasterxml.jackson.databind.JsonMappingException'>
-        <annotation name='org.jetbrains.annotations.NotNull'/>
-    </item>
-</root>
