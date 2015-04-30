@@ -8,5 +8,5 @@ import java.util.List;
 public class ResultModel {
 
     private String response;
-    private List<Audio> audioList;
+    private List<AudioModel> audioList;
 }

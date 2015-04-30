@@ -13,12 +13,13 @@ import java.util.List;
 public class VkAPI {
     private static final String API_URL = "https://api.vk.com/method/";
 
-    public void call(String method, List<String> args) {
+    protected String call(String method, List<String> args) {
         String url = UrlBuilder.create(API_URL.concat(method), args);
-        sendReq(url);
+        return sendReq(url);
     }
 
-    private void sendReq(String urlStr) {
+    private String sendReq(String urlStr) {
+        String response = null;
         try {
             System.out.println(urlStr);
 
@@ -28,18 +29,20 @@ public class VkAPI {
 
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuffer strBuffer = new StringBuffer();
 
             while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
+                strBuffer.append(inputLine);
             }
             in.close();
 
-            //print result
+            // 'OK', 'ERROR'
             System.out.println(con.getResponseMessage());
-            System.out.println(response.toString());
+            System.out.println(strBuffer.toString());
+            response = strBuffer.toString();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return response;
     }
 }

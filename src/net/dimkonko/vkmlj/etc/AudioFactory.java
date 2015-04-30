@@ -1,7 +1,9 @@
 package net.dimkonko.vkmlj.etc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.dimkonko.vkmlj.models.Audio;
+import net.dimkonko.vkmlj.models.AudioModel;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -12,14 +14,15 @@ public class AudioFactory {
 
     public static final ObjectMapper MAPPER = createMapper();
 
-    public static Audio createAudio(String json) {
-        Audio audio = null;
+    public static AudioModel createAudio(String json) {
+        AudioModel audio = null;
         try {
-            MAPPER.readValue(json, Audio.class);
+            audio = MAPPER.readValue(json, AudioModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return audio;
+
     }
 
     private static ObjectMapper createMapper() {
